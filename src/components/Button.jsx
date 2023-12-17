@@ -3,29 +3,29 @@ import { Feather } from "@expo/vector-icons"
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export default function Button ({title}) {
+export default function Button ({navigation, title, route}) {
   const handlePress = () => {
-    Alert.alert("Simple button pressed")
+    navigation.navigate(route)
   }
 
   const displayIcon = () => {
-    switch (title) {
-      case 'Nueva Lista':
+    switch (route) {
+      case 'NewList':
         return <Feather name="shopping-cart" size={100} color="black" />
-      case 'Productos':
+      case 'Products':
         return <MaterialCommunityIcons name="food-apple" size={100} color="black" />
-      case 'Historial':
+      case 'History':
         return <FontAwesome name="history" size={100} color="black" />
     }
   }
 
   const getStyle = () => {
-    switch (title) {
-      case "Nueva Lista":
+    switch (route) {
+      case "NewList":
         return 'newList'
-      case "Productos":
+      case "Products":
         return 'products'
-      case "Historial":
+      case "History":
         return 'history'
     }
   }
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "60%",
-    height: "25%",
+    height: "30%",
     borderWidth: 2,
     borderRadius: 10,
     marginTop: 20,
