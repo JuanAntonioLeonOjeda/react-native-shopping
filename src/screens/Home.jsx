@@ -6,8 +6,8 @@ export default function Home({navigation}) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Kimchi's Purr-chases</Text>
-      <Button title={"Listas"} route={"NewList"} navigation={navigation} />
-      <Button title={"Products"} route={"Products"} navigation={navigation} />
+      <Button title={"Listas"} route={"Listas"} navigation={navigation} />
+      <Button title={"Productos"} route={"Productos"} navigation={navigation} />
     </View>
   );
 }

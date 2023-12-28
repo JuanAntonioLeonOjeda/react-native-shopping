@@ -1,11 +1,11 @@
-import { collection, getDocs, query, addDoc } from "firebase/firestore"
+import { collection, getDocs, query, addDoc, orderBy } from "firebase/firestore"
 import db from "./config"
 
 const products = collection(db, "products")
 
 async function getAllProducts() {
   try {
-    const q = query(products)
+    const q = query(products, orderBy('name'))
     const querySnapshot = await getDocs(q)
     const result = querySnapshot.docs.map((doc) => doc.data())
     return result

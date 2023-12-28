@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, Alert, Text } from "react-native";
+import { StyleSheet, TouchableOpacity, Alert, Text, Image } from "react-native";
 import { Feather } from "@expo/vector-icons"
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -10,10 +10,20 @@ export default function Button ({navigation, title, route}) {
 
   const displayIcon = () => {
     switch (route) {
-      case 'NewList':
-        return <Feather name="shopping-cart" size={100} color="black" />
-      case 'Products':
-        return <MaterialCommunityIcons name="food-apple" size={100} color="black" />
+      case 'Listas':
+        return (
+          <Image
+            style={styles.tinyLogo}
+            source={require("../../assets/lists.png")}
+          />
+        );
+      case 'Productos':
+        return (
+          <Image
+            style={styles.tinyLogo}
+            source={require("../../assets/logo.png")}
+          />
+        );
       case 'History':
         return <FontAwesome name="history" size={100} color="black" />
     }
@@ -53,12 +63,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   newList: {
-    backgroundColor: "lightblue",
+    // backgroundColor: "lightblue",
   },
   products: {
-    backgroundColor: "lightgreen",
+    // backgroundColor: "lightgreen",
   },
   history: {
     backgroundColor: "lightyellow",
+  },
+  tinyLogo: {
+    width: '90%',
+    height: '90%'
   },
 });
