@@ -9,7 +9,7 @@ const ProductsStack = createNativeStackNavigator();
 export default function ProductsStackScreen() {
   return (
     <ProductsStack.Navigator screenOptions={{ headerShown: false }}>
-      <ProductsStack.Screen name="Products_Main" component={ProductsScreen} />
+      <ProductsStack.Screen name="Productos_Main" component={ProductsScreen} />
       <ProductsStack.Screen name="NewProduct" component={NewProductScreen} />
       <ProductsStack.Screen name="ProductList" component={ProductListScreen} />
     </ProductsStack.Navigator>

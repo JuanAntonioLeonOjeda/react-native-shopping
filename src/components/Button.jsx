@@ -5,7 +5,13 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function Button ({navigation, title, route}) {
   const handlePress = () => {
-    navigation.navigate(route)
+    if (route === 'Productos') {
+      navigation.navigate('Productos', { screen: 'Productos_Main' })
+    } else if (route === 'Listas') {
+      navigation.navigate("Listas", { screen: "Listas_Main" });
+    } else {
+      navigation.navigate(route)
+    }
   }
 
   const displayIcon = () => {

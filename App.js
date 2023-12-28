@@ -17,8 +17,24 @@ export default function App() {
         <QueryClientProvider client={queryClient}>
           <Tab.Navigator screenOptions={{ headerShown: false }}>
             <Tab.Screen name="Home" component={HomeStackScreen} />
-            <Tab.Screen name="Productos" component={ProductsStackScreen} />
-            <Tab.Screen name="Listas" component={ListsStackScreen} />
+            <Tab.Screen
+              name="Productos"
+              component={ProductsStackScreen}
+              listeners={({ navigation }) => ({
+                tabPress: (e) => {
+                  e.preventDefault()
+                  navigation.navigate("Productos", { screen: "Productos_Main" });
+                }})}
+            />
+            <Tab.Screen
+              name="Listas"
+              component={ListsStackScreen}
+              listeners={({ navigation }) => ({
+                tabPress: (e) => {
+                  e.preventDefault()
+                  navigation.navigate("Listas", { screen: "Listas_Main" });
+                }})}
+            />
           </Tab.Navigator>
         </QueryClientProvider>
       </NavigationContainer>
