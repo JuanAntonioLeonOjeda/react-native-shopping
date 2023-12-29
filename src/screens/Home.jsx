@@ -16,11 +16,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: "100vh",
-    backgroundColor: "#fff",
+    backgroundColor: "#e6e6e6",
     alignItems: "center",
     justifyContent: "center",
   },
   title: {
-    fontSize: 40,
+    fontSize: 40
   },
 });

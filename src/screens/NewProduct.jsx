@@ -4,7 +4,7 @@ import { useState } from "react"
 import { addProduct } from "../firebase/productQueries"
 
 export default function NewProduct() {
-  const [ input, setInput ] = useState('Nombre')
+  const [ input, setInput ] = useState('')
 
   const handlePress = async () => {
     const obj = {
@@ -16,7 +16,7 @@ export default function NewProduct() {
 
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} onChangeText={setInput} value={input} />
+      <TextInput style={styles.input} onChangeText={setInput} value={input} placeholder="Nombre" />
       <Button title={'Añadir'} onPress={handlePress}/>
     </View>
   );
