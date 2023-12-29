@@ -3,6 +3,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { Ionicons } from "@expo/vector-icons"
 
+import FishIcon from './assets/fish'
+import FishIconOutline from './assets/fish-outline'
+
 import HomeStackScreen from './src/router/HomeRouter'
 import ProductsStackScreen from './src/router/ProductRouter'
 import ListsStackScreen from './src/router/ListRouter'
@@ -23,11 +26,14 @@ export default function App() {
                 if (route.name === "Home") {
                   iconName = focused ? "home" : "home-outline"
                 } else if (route.name === "Productos") {
-                  iconName = focused ? "fish" : "fish-outline"
+                   return focused ? (
+                     <FishIcon width={size} height={size} fill={color} />
+                   ) : (
+                     <FishIconOutline width={size} height={size} fill={color} />
+                   );
                 } else if (route.name === "Listas") {
                   iconName = focused ? "cart" : "cart-outline"
                 }
-
                 return <Ionicons name={iconName} size={size} color={color} />
               }
             })}>
