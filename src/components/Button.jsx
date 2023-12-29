@@ -29,6 +29,20 @@ export default function Button ({navigation, title, route}) {
             style={styles.tinyLogo}
             source={require("../../assets/logo.png")}
           />
+        )
+      case 'ProductList':
+        return (
+          <Image
+            style={styles.tinyLogo}
+            source={require("../../assets/productList.png")}
+          />
+        )
+      case 'NewProduct':
+        return (
+          <Image
+            style={styles.tinyLogo}
+            source={require("../../assets/newProduct.png")}
+          />
         );
       case 'History':
         return <FontAwesome name="history" size={100} color="black" />

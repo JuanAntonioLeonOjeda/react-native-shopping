@@ -18,7 +18,7 @@ export default function Products() {
   const { isLoading, data, refetch } = useQuery("products", getAllProducts)
   const [searchQuery, setSearchQuery] = useState('')
 
-  const filterProducts = data.filter(product => {
+  const filterProducts = data?.filter(product => {
     return product.name.toLowerCase().includes(searchQuery.toLowerCase())
   })
 
@@ -27,12 +27,12 @@ export default function Products() {
     return (
       <SafeAreaView style={styles.container}>
         <SearchBar query={searchQuery} onChange={setSearchQuery} />
-        <FlatList
-          style={styles.list}
-          data={filterProducts}
-          keyExtractor={(item) => item.name}
-          renderItem={({ item }) => <ListItem info={item} refetch={refetch}/>}
-        />
+          <FlatList
+            style={styles.list}
+            data={filterProducts}
+            keyExtractor={(item) => item.name}
+            renderItem={({ item }) => <ListItem info={item} refetch={refetch}/>}
+          />
       </SafeAreaView>
     );
   };
