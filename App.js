@@ -31,7 +31,7 @@ export default function App() {
                    ) : (
                      <FishIconOutline width={size} height={size} fill={color} />
                    );
-                } else if (route.name === "Listas") {
+                } else if (route.name === "Cestas") {
                   iconName = focused ? "cart" : "cart-outline"
                 }
                 return <Ionicons name={iconName} size={size} color={color} />
@@ -48,12 +48,12 @@ export default function App() {
                 }})}
             />
             <Tab.Screen
-              name="Listas"
+              name="Cestas"
               component={ListsStackScreen}
               listeners={({ navigation }) => ({
                 tabPress: (e) => {
                   e.preventDefault()
-                  navigation.navigate("Listas", { screen: "Listas_Main" });
+                  navigation.navigate("Cestas", { screen: "Cestas_Main" });
                 }})}
             />
           </Tab.Navigator>

@@ -7,7 +7,7 @@ const ListsStack = createNativeStackNavigator();
 export default function ListsStackScreen() {
   return (
     <ListsStack.Navigator screenOptions={{ headerShown: false }}>
-      <ListsStack.Screen name="Listas_Main" component={ListsScreen} />
+      <ListsStack.Screen name="Cestas_Main" component={ListsScreen} />
     </ListsStack.Navigator>
   );
 }

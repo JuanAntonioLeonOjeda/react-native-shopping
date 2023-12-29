@@ -7,8 +7,8 @@ export default function Button ({navigation, title, route}) {
   const handlePress = () => {
     if (route === 'Productos') {
       navigation.navigate('Productos', { screen: 'Productos_Main' })
-    } else if (route === 'Listas') {
-      navigation.navigate("Listas", { screen: "Listas_Main" });
+    } else if (route === 'Cestas') {
+      navigation.navigate("Cestas", { screen: "Cestas_Main" });
     } else {
       navigation.navigate(route)
     }
@@ -16,7 +16,7 @@ export default function Button ({navigation, title, route}) {
 
   const displayIcon = () => {
     switch (route) {
-      case 'Listas':
+      case 'Cestas':
         return (
           <Image
             style={styles.tinyLogo}

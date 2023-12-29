@@ -10,7 +10,7 @@ export default function HomeStackScreen() {
   return (
     <HomeStack.Navigator screenOptions={{ headerShown: false }}>
       <HomeStack.Screen name="Home_Main" component={HomeScreen} />
-      <HomeStack.Screen name="Home_Listas" component={ListsScreen} />
+      <HomeStack.Screen name="Home_Cestas" component={ListsScreen} />
       <HomeStack.Screen name="Home_Productos" component={ProductsScreen} />
     </HomeStack.Navigator>
   );
