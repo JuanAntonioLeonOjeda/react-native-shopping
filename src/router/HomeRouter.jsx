@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import HomeScreen from "../screens/Home"
-import ListsScreen from "../screens/NewList"
+import ListsScreen from "../screens/Lists"
 import ProductsScreen from "../screens/Products"
 
 const HomeStack = createNativeStackNavigator()

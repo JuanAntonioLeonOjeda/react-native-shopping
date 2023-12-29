@@ -4,7 +4,8 @@ import {
   Text,
   FlatList,
   SafeAreaView,
-  StatusBar
+  StatusBar,
+  Image
 } from "react-native"
 import { useState } from "react";
 import { useQuery } from "react-query";
@@ -23,7 +24,17 @@ export default function Products() {
   })
 
   const displayProducts = (refetch) => {
-    if (isLoading) return <Text>Loading...</Text>
+    if (isLoading) return (
+      <>
+        <Image
+          style={styles.tinyLogo}
+          source={require("../../assets/loading.png")}
+        />
+        <Text>
+          Cargando...
+        </Text>
+      </>
+    )
     return (
       <SafeAreaView style={styles.container}>
         <SearchBar query={searchQuery} onChange={setSearchQuery} />
@@ -51,9 +62,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#e6e6e6",
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: StatusBar.currentHeight
+    paddingTop: StatusBar.currentHeight,
   },
   list: {
-    width: "100%"
-  }
+    width: "100%",
+  },
+  tinyLogo: {
+    width: "100%",
+    height: "60%",
+  },
 });

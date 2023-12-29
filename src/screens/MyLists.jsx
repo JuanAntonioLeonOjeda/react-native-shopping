@@ -1,9 +1,9 @@
-import { StyleSheet, View, Text } from "react-native"
+import { StyleSheet, View, Text } from "react-native";
 
-export default function NewList({ navigation }) {
+export default function MyLists({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text>Nueva Cesta</Text>
+      <Text>Mis Cestas</Text>
     </View>
   );
 }
