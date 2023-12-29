@@ -2,11 +2,12 @@ import { View, Text, StyleSheet, Alert } from "react-native"
 import { useState } from "react"
 import { Ionicons } from "@expo/vector-icons"
 
+import CustomModal from "./CustomModal"
+import DeleteModal from './DeleteModal'
 
-import CustomModal from "./CustomModal";
-
-export default function ListItem({ info }) {
+export default function ListItem({ info, refetch }) {
   const [modalVisible, setModalVisible] = useState(false)
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false)
 
   const editProduct = () => {
     setModalVisible(true)
@@ -17,7 +18,11 @@ export default function ListItem({ info }) {
   }
 
   const deleteProduct = () => {
-    Alert.alert(`${info.name} eliminado`);
+    setDeleteModalVisible(true)
+  }
+
+  const cancelDelete = () => {
+    setDeleteModalVisible(false)
   }
 
   return (
@@ -34,6 +39,13 @@ export default function ListItem({ info }) {
           visible={modalVisible}
           defaultValue={info.name}
           onClose={cancelEdit}
+          refetch={refetch}
+        />
+        <DeleteModal
+          visible={deleteModalVisible}
+          product={info.name}
+          onClose={cancelDelete}
+          refetch={refetch}
         />
         <Ionicons name="trash" color="red" size={24} onPress={deleteProduct} />
       </View>

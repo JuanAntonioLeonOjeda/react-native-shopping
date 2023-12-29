@@ -1,21 +1,26 @@
-import { StyleSheet, Alert, Modal, View, TextInput, Button } from 'react-native'
-import { useState } from 'react'
+import {
+  StyleSheet,
+  Alert,
+  Modal,
+  View,
+  Text,
+  Button,
+} from "react-native";
 
-import { editProduct } from '../firebase/productQueries'
+import { deleteProduct } from "../firebase/productQueries";
 
-export default function CustomModal ({ visible, defaultValue, onClose, refetch }) {
-  const [text, setText] = useState(defaultValue);
+export default function CustomModal({ visible, product, onClose, refetch }) {
 
-  const saveChanges = async () => {
-    const result = await editProduct(defaultValue,text)
+  const confirmDelete = async () => {
+    const result = await deleteProduct(product)
     if (result === 200) {
-      Alert.alert(`${text} editado`)
+      Alert.alert(`${product} eliminado`)
     } else {
       Alert.alert(`Ha habido algún error`)
     }
     onClose()
     refetch()
-  }
+  };
 
   return (
     <Modal
@@ -27,20 +32,18 @@ export default function CustomModal ({ visible, defaultValue, onClose, refetch }
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <TextInput
-            style={styles.modalText}
-            onChangeText={setText}
-            value={text}
-          />
+          <Text style={styles.modalText}>
+            {`Eliminar ${product}?`}
+          </Text>
           <View style={styles.actions}>
-            <Button title="Guardar" onPress={saveChanges} color="green" />
+            <Button title="Eliminar" onPress={confirmDelete} color="red" />
             <Button title="Cancelar" onPress={onClose} />
           </View>
         </View>
       </View>
     </Modal>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -72,8 +75,7 @@ const styles = StyleSheet.create({
   modalText: {
     width: "80%",
     marginBottom: 15,
-    textAlign: "center",
-    borderWidth: 1
+    textAlign: "center"
   },
   actions: {
     width: "90%",
@@ -81,4 +83,3 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 });
-

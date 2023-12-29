@@ -5,25 +5,33 @@ import {
   FlatList,
   SafeAreaView,
   StatusBar
-} from "react-native";
+} from "react-native"
+import { useState } from "react";
 import { useQuery } from "react-query";
 
 import { getAllProducts } from "../firebase/productQueries";
 
-import ListItem from "../components/ListItem";
+import ListItem from "../components/ListItem"
+import SearchBar from "../components/SearchBar";
 
 export default function Products() {
-  const { isLoading, data } = useQuery("products", getAllProducts);
+  const { isLoading, data, refetch } = useQuery("products", getAllProducts)
+  const [searchQuery, setSearchQuery] = useState('')
 
-  const displayProducts = () => {
+  const filterProducts = data.filter(product => {
+    return product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  })
+
+  const displayProducts = (refetch) => {
     if (isLoading) return <Text>Loading...</Text>
     return (
       <SafeAreaView style={styles.container}>
+        <SearchBar query={searchQuery} onChange={setSearchQuery} />
         <FlatList
           style={styles.list}
-          data={data}
+          data={filterProducts}
           keyExtractor={(item) => item.name}
-          renderItem={({ item }) => <ListItem info={item}/>}
+          renderItem={({ item }) => <ListItem info={item} refetch={refetch}/>}
         />
       </SafeAreaView>
     );
@@ -31,7 +39,7 @@ export default function Products() {
 
   return (
     <View style={styles.container}>
-      {displayProducts()}
+      {displayProducts(refetch)}
     </View>
   );
 }
