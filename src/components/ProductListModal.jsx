@@ -16,18 +16,27 @@ import ProductItem from "./ProductItem";
 export default function ProductListModal({
   visible,
   list,
+  selected,
   setList,
   onClose,
 }) {
   const [searchQuery, setSearchQuery] = useState("")
 
   const addProduct = (item) => {
-    setList((prev) => ([...prev, item]))
+    if (!isOnList(item)) {
+      setList((prev) => ([...prev, item]))
+    } else {
+      setList((prev) => prev.filter(i => i !== item))
+    }
   }
 
   const filterProducts = list?.filter((product) => {
     return product.name.toLowerCase().includes(searchQuery.toLowerCase())
   })
+
+  const isOnList = (item) => {
+    return selected.includes(item)
+  }
 
   return (
     <Modal
@@ -45,7 +54,7 @@ export default function ProductListModal({
             style={styles.list}
             data={filterProducts}
             keyExtractor={(item) => item.name}
-            renderItem={({ item }) => <ProductItem info={item} add={addProduct}/>}
+            renderItem={({ item }) => <ProductItem info={item} add={addProduct} selected={isOnList(item.name)}/>}
           />
         </View>
       </View>

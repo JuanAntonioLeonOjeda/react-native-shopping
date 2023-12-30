@@ -47,6 +47,7 @@ export default function NewList({ navigation }) {
         <ProductListModal
           visible={modalVisible}
           list={data}
+          selected={added}
           setList={setAdded}
           onClose={closeModal}
         />
