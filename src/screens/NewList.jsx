@@ -5,6 +5,7 @@ import { useQuery } from "react-query"
 import { getAllProducts } from "../firebase/productQueries"
 
 import ProductListModal from "../components/ProductListModal"
+import ProductItem from "../components/ProductItem"
 
 export default function NewList({ navigation }) {
   const [name, setName] = useState('')
@@ -19,6 +20,18 @@ export default function NewList({ navigation }) {
 
   const closeModal = () => {
     setModalVisible(false)
+  }
+
+  const isOnList = (item) => {
+    return added.includes(item);
+  }
+
+  const addProduct = (item) => {
+    if (!isOnList(item)) {
+      setAdded((prev) => [...prev, item]);
+    } else {
+      setAdded((prev) => prev.filter((i) => i !== item))
+    }
   }
 
   const displayProducts = (refetch) => {
@@ -47,15 +60,19 @@ export default function NewList({ navigation }) {
         <ProductListModal
           visible={modalVisible}
           list={data}
-          selected={added}
-          setList={setAdded}
+          selected={isOnList}
+          setList={addProduct}
           onClose={closeModal}
         />
         <FlatList
           style={styles.list}
           data={added}
-          keyExtractor={(item) => item.name}
-          renderItem={({ item }) => <Text>{item}</Text>}
+          keyExtractor={(item) => item}
+          renderItem={({ item }) => (
+            <ProductItem 
+              info={item} 
+              add={addProduct} 
+            />)}
         />
       </SafeAreaView>
     );

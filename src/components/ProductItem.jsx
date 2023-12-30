@@ -1,14 +1,14 @@
 import { View, Text, StyleSheet, Alert } from "react-native"
 import { Ionicons } from "@expo/vector-icons";
 
-export default function ProductItem({ info, add, selected }) {
+export default function ProductItem({ info, add, selected=true }) {
   return (
     <View style={styles.item}>
-      <Text style={styles.text}>{info.name}</Text>
+      <Text style={styles.text}>{info}</Text>
       <Ionicons
         name={selected ? "trash" : "add-circle-outline"}
         size={24}
-        onPress={() => add(info.name)}
+        onPress={() => add(info)}
         color={selected ? "red" : "#2196f3"}
       />
     </View>
