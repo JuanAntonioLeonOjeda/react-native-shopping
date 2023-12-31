@@ -36,6 +36,10 @@ export default function NewList({ navigation }) {
     }
   }
 
+  const saveList = () => {
+    console.log(name, added)
+  }
+
   const displayProducts = (refetch) => {
     if (isLoading)
       return (
@@ -67,14 +71,16 @@ export default function NewList({ navigation }) {
           data={added}
           keyExtractor={(item) => item.name}
           renderItem={({ item }) => (
-            <ProductItem info={item} add={addProduct} />
+            <ProductItem info={item} add={addProduct} selected={true} />
           )}
         />
         <Button 
           radius={"sm"} 
           type="solid" 
           title="Guardar" 
-          color="green" 
+          color="green"
+          disabled={!name || added.length === 0 ? true : false}
+          onPress={saveList}
         />
       </SafeAreaView>
     );

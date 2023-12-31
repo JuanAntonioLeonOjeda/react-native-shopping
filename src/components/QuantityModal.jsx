@@ -3,11 +3,13 @@ import {
   Modal,
   View,
   TextInput,
-  Button
+  Button,
+  Text
 } from "react-native";
 import { useState } from "react";
 
 export default function QuantityModal({
+  product,
   visible,
   onClose,
   addToList
@@ -33,6 +35,7 @@ export default function QuantityModal({
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
+          <Text style={styles.modalTitle}>{product}</Text>
           <TextInput
             style={styles.modalText}
             onChangeText={setInput}
@@ -98,6 +101,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  modalTitle: {
+    fontSize: 25,
+    marginBottom: 15
   },
   modalText: {
     width: "80%",

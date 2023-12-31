@@ -28,18 +28,18 @@ export default function ProductItem({ info, selected }) {
   }
 
   return (
-    <View
-      style={styles.item} 
-      >
+    <View style={styles.item}>
       <Text style={styles.text}>{info.name}</Text>
+      <Text style={styles.text}>{info.qty} {info.units}</Text>
       <Ionicons
         name={selected ? "trash" : "add-circle-outline"}
         size={24}
         onPress={!selected ? openModal : () => addToList(info)}
         color={selected ? "red" : "#2196f3"}
       />
-      <QuantityModal 
-        visible={visible} 
+      <QuantityModal
+        product={info.name}
+        visible={visible}
         onClose={closeModal}
         addToList={addToList}
       />
