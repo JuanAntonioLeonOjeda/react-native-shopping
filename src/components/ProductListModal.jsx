@@ -17,7 +17,6 @@ export default function ProductListModal({
   visible,
   list,
   selected,
-  setList,
   onClose,
 }) {
   const [searchQuery, setSearchQuery] = useState("")
@@ -44,8 +43,7 @@ export default function ProductListModal({
             keyExtractor={(item) => item.name}
             renderItem={({ item }) => (
               <ProductItem 
-                info={item.name} 
-                add={setList} 
+                info={item}
                 selected={selected(item.name)}
               />)}
           />
@@ -57,7 +55,7 @@ export default function ProductListModal({
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    width: "100%"
   },
   centeredView: {
     flex: 1,
@@ -67,6 +65,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: "90%",
+    height: "90%",
     borderWidth: 2,
     margin: 20,
     backgroundColor: "white",

@@ -1,15 +1,47 @@
-import { View, Text, StyleSheet, Alert } from "react-native"
-import { Ionicons } from "@expo/vector-icons";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useState, useContext } from "react"
+import { Ionicons } from "@expo/vector-icons"
 
-export default function ProductItem({ info, add, selected=true }) {
+import ListContext from "../context/newListContext";
+
+import QuantityModal from "./QuantityModal"
+
+export default function ProductItem({ info, selected }) {
+  const {addProduct} = useContext(ListContext)
+  const [visible, setVisible] = useState(false)
+
+  const openModal = () => {
+    setVisible(true)
+  };
+
+  const closeModal = () => {
+    setVisible(false)
+  }
+
+  const addToList = (qty, units) => {
+    addProduct({
+      name: info.name,
+      qty,
+      units
+    })
+    closeModal()
+  }
+
   return (
-    <View style={styles.item}>
-      <Text style={styles.text}>{info}</Text>
+    <View
+      style={styles.item} 
+      >
+      <Text style={styles.text}>{info.name}</Text>
       <Ionicons
         name={selected ? "trash" : "add-circle-outline"}
         size={24}
-        onPress={() => add(info)}
+        onPress={!selected ? openModal : () => addToList(info)}
         color={selected ? "red" : "#2196f3"}
+      />
+      <QuantityModal 
+        visible={visible} 
+        onClose={closeModal}
+        addToList={addToList}
       />
     </View>
   );

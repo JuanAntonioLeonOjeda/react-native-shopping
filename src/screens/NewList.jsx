@@ -1,6 +1,8 @@
-import { StyleSheet, View, Text, TextInput, Image, SafeAreaView, FlatList, StatusBar, Button } from "react-native"
+import { StyleSheet, View, Text, TextInput, Image, SafeAreaView, FlatList, StatusBar, Button, Icon } from "react-native"
 import { useState } from "react"
 import { useQuery } from "react-query"
+
+import ListContext from '../context/newListContext'
 
 import { getAllProducts } from "../firebase/productQueries"
 
@@ -22,15 +24,15 @@ export default function NewList({ navigation }) {
     setModalVisible(false)
   }
 
-  const isOnList = (item) => {
-    return added.includes(item);
+  const isOnList = (name) => {
+    return added.find(product => product.name === name)
   }
 
   const addProduct = (item) => {
-    if (!isOnList(item)) {
+    if (!isOnList(item.name)) {
       setAdded((prev) => [...prev, item]);
     } else {
-      setAdded((prev) => prev.filter((i) => i !== item))
+      setAdded((prev) => prev.filter((i) => i.name !== item.name))
     }
   }
 
@@ -53,35 +55,37 @@ export default function NewList({ navigation }) {
           onChangeText={setName}
           placeholder="Nombre"
         />
-        <Button 
-          title="Añadir Producto"
-          onPress={openModal}
-        />
+        <Button title="Añadir Producto" onPress={openModal} />
         <ProductListModal
           visible={modalVisible}
           list={data}
           selected={isOnList}
-          setList={addProduct}
           onClose={closeModal}
         />
         <FlatList
           style={styles.list}
           data={added}
-          keyExtractor={(item) => item}
+          keyExtractor={(item) => item.name}
           renderItem={({ item }) => (
-            <ProductItem 
-              info={item} 
-              add={addProduct} 
-            />)}
+            <ProductItem info={item} add={addProduct} />
+          )}
+        />
+        <Button 
+          radius={"sm"} 
+          type="solid" 
+          title="Guardar" 
+          color="green" 
         />
       </SafeAreaView>
     );
   };
 
   return (
-    <View style={styles.container}>
-      { displayProducts() }
-    </View>
+    <ListContext.Provider value={{added, addProduct}}>
+      <View style={styles.container}>
+        { displayProducts() }
+      </View>
+    </ListContext.Provider>
   );
 }
 
@@ -94,6 +98,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     paddingTop: StatusBar.currentHeight,
+    paddingBottom: 10
   },
   input: {
     height: 40,
