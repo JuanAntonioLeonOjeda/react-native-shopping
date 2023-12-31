@@ -1,6 +1,11 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text } from "react-native"
+import { useQuery } from "react-query"
+
+import { getAllLists } from "../firebase/listsQueries"
 
 export default function MyLists({ navigation }) {
+  const { isLoading, data, refetch } = useQuery("lists", getAllLists)
+  console.log(data)
   return (
     <View style={styles.container}>
       <Text>Mis Cestas</Text>

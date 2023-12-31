@@ -1,10 +1,11 @@
-import { StyleSheet, View, Text, TextInput, Image, SafeAreaView, FlatList, StatusBar, Button, Icon } from "react-native"
+import { StyleSheet, View, Text, TextInput, Image, SafeAreaView, FlatList, StatusBar, Button, Alert} from "react-native"
 import { useState } from "react"
 import { useQuery } from "react-query"
 
 import ListContext from '../context/newListContext'
 
 import { getAllProducts } from "../firebase/productQueries"
+import { createList } from "../firebase/listsQueries"
 
 import ProductListModal from "../components/ProductListModal"
 import ProductItem from "../components/ProductItem"
@@ -36,8 +37,12 @@ export default function NewList({ navigation }) {
     }
   }
 
-  const saveList = () => {
-    console.log(name, added)
+  const saveList = async () => {
+    await createList({
+      name,
+      products: added
+    })
+    Alert.alert(`Lista ${name} creada`)
   }
 
   const displayProducts = (refetch) => {
