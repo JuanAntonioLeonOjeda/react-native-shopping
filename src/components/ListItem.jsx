@@ -5,7 +5,9 @@ import { Ionicons } from "@expo/vector-icons"
 import CustomModal from "./CustomModal"
 import DeleteModal from './DeleteModal'
 
-export default function ListItem({ info, refetch }) {
+export default function ListItem({ info, refetch, navigation }) {
+  const routeName = navigation.getState().routes[navigation.getState().index].name
+
   const [modalVisible, setModalVisible] = useState(false)
   const [deleteModalVisible, setDeleteModalVisible] = useState(false)
 
@@ -17,7 +19,7 @@ export default function ListItem({ info, refetch }) {
     setModalVisible(false)
   }
 
-  const deleteProduct = () => {
+  const deleteElement = () => {
     setDeleteModalVisible(true)
   }
 
@@ -25,15 +27,19 @@ export default function ListItem({ info, refetch }) {
     setDeleteModalVisible(false)
   }
 
+  const copyList = () => {
+    console.log('copiaro')
+  }
+
   return (
     <View style={styles.item}>
       <Text style={styles.text}>{info.name}</Text>
       <View style={styles.actions}>
         <Ionicons
-          name="pencil"
+          name={routeName === "ProductList" ? "pencil" : "copy-outline"}
           color="#2196f3"
           size={24}
-          onPress={editProduct}
+          onPress={routeName === "ProductList" ? editProduct : copyList}
         />
         <CustomModal
           visible={modalVisible}
@@ -46,8 +52,9 @@ export default function ListItem({ info, refetch }) {
           product={info.name}
           onClose={cancelDelete}
           refetch={refetch}
+          routeName={routeName}
         />
-        <Ionicons name="trash" color="red" size={24} onPress={deleteProduct} />
+        <Ionicons name="trash" color="red" size={24} onPress={deleteElement} />
       </View>
     </View>
   );

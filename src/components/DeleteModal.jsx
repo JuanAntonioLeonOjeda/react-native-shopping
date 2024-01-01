@@ -8,11 +8,17 @@ import {
 } from "react-native";
 
 import { deleteProduct } from "../firebase/productQueries";
+import { deleteList } from "../firebase/listsQueries";
 
-export default function CustomModal({ visible, product, onClose, refetch }) {
+export default function CustomModal({ visible, product, onClose, refetch, routeName }) {
 
   const confirmDelete = async () => {
-    const result = await deleteProduct(product)
+    let result
+    if (routeName === "ProductList") {
+      result = await deleteProduct(product)
+    } else {
+      result = await deleteList(product);
+    }
     if (result === 200) {
       Alert.alert(`${product} eliminado`)
     } else {

@@ -13,9 +13,9 @@ import { useQuery } from "react-query";
 import { getAllProducts } from "../firebase/productQueries";
 
 import ListItem from "../components/ListItem"
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../components/SearchBar"
 
-export default function Products() {
+export default function Products({navigation}) {
   const { isLoading, data, refetch } = useQuery("products", getAllProducts)
   const [searchQuery, setSearchQuery] = useState('')
 
@@ -42,7 +42,7 @@ export default function Products() {
             style={styles.list}
             data={filterProducts}
             keyExtractor={(item) => item.name}
-            renderItem={({ item }) => <ListItem info={item} refetch={refetch}/>}
+            renderItem={({ item }) => <ListItem info={item} refetch={refetch} navigation={navigation}/>}
           />
       </SafeAreaView>
     );

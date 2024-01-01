@@ -34,7 +34,22 @@ async function createList (data) {
   }
 }
 
+async function deleteList(list) {
+  try {
+    const q = query(listCollection, where("name", "==", list));
+
+    const querySnapshot = await getDocs(q);
+    let listDoc = querySnapshot.docs[0];
+
+    await deleteDoc(listDoc.ref);
+    return 200;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export {
   getAllLists,
-  createList
+  createList,
+  deleteList
 }
