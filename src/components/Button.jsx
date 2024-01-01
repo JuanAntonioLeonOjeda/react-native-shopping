@@ -1,15 +1,22 @@
 import { StyleSheet, TouchableOpacity, Alert, Text, Image } from "react-native";
+import { useContext } from "react";
 import { Ionicons } from "@expo/vector-icons"
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+import ListContext from "../context/newListContext";
+
 export default function Button ({navigation, title, route}) {
+  const {setAdded} = useContext(ListContext)
   const handlePress = () => {
     if (route === 'Productos') {
       navigation.navigate('Productos', { screen: 'Productos_Main' })
     } else if (route === 'Cestas') {
       navigation.navigate("Cestas", { screen: "Cestas_Main" });
     } else {
+      if (route === "NewList") {
+        setAdded([])
+      }
       navigation.navigate(route)
     }
   }

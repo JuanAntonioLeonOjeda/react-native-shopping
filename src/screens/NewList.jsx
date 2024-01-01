@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text, TextInput, Image, SafeAreaView, FlatList, StatusBar, Button, Alert} from "react-native"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { useQuery } from "react-query"
 
 import ListContext from '../context/newListContext'
@@ -11,11 +11,12 @@ import ProductListModal from "../components/ProductListModal"
 import ProductItem from "../components/ProductItem"
 
 export default function NewList({ navigation }) {
+  const {added, addProduct, isOnList} = useContext(ListContext)
+
   const [name, setName] = useState('')
-  const [added, setAdded] = useState([])
   const [modalVisible, setModalVisible] = useState(false)
 
-  const { isLoading, data, refetch } = useQuery("products", getAllProducts)
+  const { isLoading, data } = useQuery("products", getAllProducts)
 
   const openModal = () => {
     setModalVisible(true);
@@ -23,18 +24,6 @@ export default function NewList({ navigation }) {
 
   const closeModal = () => {
     setModalVisible(false)
-  }
-
-  const isOnList = (name) => {
-    return added.find(product => product.name === name)
-  }
-
-  const addProduct = (item) => {
-    if (!isOnList(item.name)) {
-      setAdded((prev) => [...prev, item]);
-    } else {
-      setAdded((prev) => prev.filter((i) => i.name !== item.name))
-    }
   }
 
   const saveList = async () => {
@@ -92,11 +81,9 @@ export default function NewList({ navigation }) {
   };
 
   return (
-    <ListContext.Provider value={{added, addProduct}}>
-      <View style={styles.container}>
-        { displayProducts() }
-      </View>
-    </ListContext.Provider>
+    <View style={styles.container}>
+      { displayProducts() }
+    </View>
   );
 }
 

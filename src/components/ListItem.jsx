@@ -1,12 +1,16 @@
 import { View, Text, StyleSheet, Alert } from "react-native"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { Ionicons } from "@expo/vector-icons"
+
+import ListContext from "../context/newListContext"
 
 import CustomModal from "./CustomModal"
 import DeleteModal from './DeleteModal'
 
 export default function ListItem({ info, refetch, navigation }) {
   const routeName = navigation.getState().routes[navigation.getState().index].name
+
+  const { addProduct } = useContext(ListContext)
 
   const [modalVisible, setModalVisible] = useState(false)
   const [deleteModalVisible, setDeleteModalVisible] = useState(false)
@@ -28,7 +32,8 @@ export default function ListItem({ info, refetch, navigation }) {
   }
 
   const copyList = () => {
-    console.log('copiaro')
+    addProduct(...info.products)
+    navigation.navigate("NewList")
   }
 
   return (
@@ -46,6 +51,7 @@ export default function ListItem({ info, refetch, navigation }) {
           defaultValue={info.name}
           onClose={cancelEdit}
           refetch={refetch}
+          routeName={routeName}
         />
         <DeleteModal
           visible={deleteModalVisible}
