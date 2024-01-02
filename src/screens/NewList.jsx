@@ -11,7 +11,7 @@ import ProductListModal from "../components/ProductListModal"
 import ProductItem from "../components/ProductItem"
 
 export default function NewList({ navigation }) {
-  const {added, addProduct, isOnList} = useContext(ListContext)
+  const {added, isOnList} = useContext(ListContext)
 
   const [name, setName] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
@@ -65,7 +65,11 @@ export default function NewList({ navigation }) {
           data={added}
           keyExtractor={(item) => item.name}
           renderItem={({ item }) => (
-            <ProductItem info={item} add={addProduct} selected={true} />
+            <ProductItem 
+              navigation={navigation} 
+              info={item} 
+              selected={true} 
+            />
           )}
         />
         <Button 

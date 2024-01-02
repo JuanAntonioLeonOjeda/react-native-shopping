@@ -36,10 +36,22 @@ export default function ListItem({ info, refetch, navigation }) {
     navigation.navigate("NewList")
   }
 
+  const getOneList = () => {
+    navigation.navigate('OneList', {products: info.products})
+  }
+
   return (
     <View style={styles.item}>
       <Text style={styles.text}>{info.name}</Text>
       <View style={styles.actions}>
+        {routeName === "MyLists" && (
+          <Ionicons
+            name="cart-outline"
+            color="#2196f3"
+            size={24}
+            onPress={getOneList}
+          />
+        )}
         <Ionicons
           name={routeName === "ProductList" ? "pencil" : "copy-outline"}
           color="#2196f3"
@@ -85,7 +97,7 @@ const styles = StyleSheet.create({
   },
   actions: {
     flexDirection: "row",
-    width: 60,
+    width: 100,
     justifyContent: "space-between"
   }
 });

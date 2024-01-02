@@ -6,7 +6,9 @@ import ListContext from "../context/newListContext";
 
 import QuantityModal from "./QuantityModal"
 
-export default function ProductItem({ info, selected }) {
+export default function ProductItem({ navigation, info, selected, addToCart }) {
+  const routeName =
+    navigation?.getState().routes[navigation?.getState().index].name;
   const {addProduct} = useContext(ListContext)
   const [visible, setVisible] = useState(false)
 
@@ -30,13 +32,24 @@ export default function ProductItem({ info, selected }) {
   return (
     <View style={styles.item}>
       <Text style={styles.text}>{info.name}</Text>
-      <Text style={styles.text}>{info.qty} {info.units}</Text>
-      <Ionicons
-        name={selected ? "trash" : "add-circle-outline"}
-        size={24}
-        onPress={!selected ? openModal : () => addToList(info)}
-        color={selected ? "red" : "#2196f3"}
-      />
+      <Text style={styles.text}>
+        {info.qty} {info.units}
+      </Text>
+      {routeName === "OneList" ? (
+        <Ionicons
+          name={selected ? "checkmark-outline" : "add-circle-outline"}
+          size={24}
+          color={selected ? "green" : "#2196f3"}
+          onPress={() => addToCart(info.name)}
+        />
+      ) : (
+        <Ionicons
+          name={selected ? "trash" : "add-circle-outline"}
+          size={24}
+          onPress={!selected ? openModal : () => addToList(info)}
+          color={selected ? "red" : "#2196f3"}
+        />
+      )}
       <QuantityModal
         product={info.name}
         visible={visible}
