@@ -23,7 +23,6 @@ export default function OneList({ navigation, route }) {
     if (!isSelected(item)) {
       setSelected((prev) => [...prev, item]);
     } else {
-      console.log('NOP')
       setSelected((prev) => prev.filter((p) => p !== item));
     }
   }

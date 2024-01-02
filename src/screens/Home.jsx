@@ -1,12 +1,14 @@
 import { StyleSheet, View, Text } from "react-native"
 
 import Button from "../components/Button"
+import Header from "../components/Header";
 
 export default function Home({navigation}) {
 
   return (
+    <>
+    <Header title={"Kimchi's Purr-chases"} />
     <View style={styles.container}>
-      <Text style={styles.title}>Kimchi's Purr-chases</Text>
       <Button title={"Cestas"} route={"Cestas"} navigation={navigation} />
       <Button
         title={"Productos"}
@@ -14,6 +16,7 @@ export default function Home({navigation}) {
         navigation={navigation}
       />
     </View>
+    </>
   );
 }
 

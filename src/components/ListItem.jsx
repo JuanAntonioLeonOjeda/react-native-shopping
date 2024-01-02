@@ -32,7 +32,8 @@ export default function ListItem({ info, refetch, navigation }) {
   }
 
   const copyList = () => {
-    addProduct(...info.products)
+    addProduct('clear')
+    addProduct(info.products)
     navigation.navigate("NewList")
   }
 

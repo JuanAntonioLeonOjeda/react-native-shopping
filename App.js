@@ -24,13 +24,26 @@ export default function App() {
     return added.find((product) => product.name === name);
   };
 
+
   const addProduct = (item) => {
-    if (!isOnList(item.name)) {
-      setAdded((prev) => [...prev, item]);
-    } else {
-      setAdded((prev) => prev.filter((i) => i.name !== item.name));
-    }
+    setAdded((prev) => {
+      if (item === "clear") {
+        return [];
+      } else if (!item.length) {
+        const exists = prev.find((i) => i.name === item.name);
+        return exists
+          ? prev.filter((i) => i.name !== item.name)
+          : [...prev, item];
+      } else {
+        const newProducts = item.filter(
+          (i) => !prev.find((p) => p.name === i.name)
+        );
+        return [...prev, ...newProducts];
+      }
+    });
   };
+
+
   return (
     <>
       <ListContext.Provider value={{ added, setAdded, addProduct, isOnList }}>
@@ -39,6 +52,8 @@ export default function App() {
             <Tab.Navigator
               screenOptions={({ route }) => ({
                 headerShown: false,
+                tabBarActiveTintColor: '#fff',
+                tabBarStyle: { backgroundColor: 'black' },
                 tabBarIcon: ({ focused, color, size }) => {
                   let iconName;
 

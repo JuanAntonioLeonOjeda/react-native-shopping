@@ -23,36 +23,50 @@ export default function Button ({navigation, title, route}) {
 
   const displayIcon = () => {
     switch (route) {
-      case 'Cestas':
+      case "Cestas":
         return (
           <Image
             style={styles.tinyLogo}
             source={require("../../assets/lists.png")}
           />
         );
-      case 'Productos':
+      case "Productos":
         return (
           <Image
             style={styles.tinyLogo}
             source={require("../../assets/logo.png")}
           />
-        )
-      case 'ProductList':
+        );
+      case "ProductList":
         return (
           <Image
             style={styles.tinyLogo}
             source={require("../../assets/productList.png")}
           />
-        )
-      case 'NewProduct':
+        );
+      case "NewProduct":
         return (
           <Image
             style={styles.tinyLogo}
             source={require("../../assets/newProduct.png")}
           />
         );
-      case 'History':
-        return <FontAwesome name="history" size={100} color="black" />
+      case "NewList":
+        return (
+          <Image
+            style={styles.tinyLogo}
+            source={require("../../assets/newList.png")}
+          />
+        );
+      case "MyLists":
+        return (
+          <Image
+            style={styles.tinyLogo}
+            source={require("../../assets/myLists.png")}
+          />
+        );
+      case "History":
+        return <FontAwesome name="history" size={100} color="black" />;
     }
   }
 
