@@ -2,6 +2,7 @@ import { TextInput, View, StyleSheet, Text, Button, Alert } from "react-native"
 import { useState } from "react"
 
 import { addProduct } from "../firebase/productQueries"
+import Header from "../components/Header"
 
 export default function NewProduct() {
   const [ input, setInput ] = useState('')
@@ -15,10 +16,13 @@ export default function NewProduct() {
   }
 
   return (
-    <View style={styles.container}>
-      <TextInput style={styles.input} onChangeText={setInput} value={input} placeholder="Nombre" />
-      <Button title={'Añadir'} onPress={handlePress}/>
-    </View>
+    <>
+      <Header title={"Kimchi's Purr-chases"} />
+      <View style={styles.container}>
+        <TextInput style={styles.input} onChangeText={setInput} value={input} placeholder="Nombre" />
+        <Button title={'Añadir'} onPress={handlePress}/>
+      </View>
+    </>
   );
 }
 

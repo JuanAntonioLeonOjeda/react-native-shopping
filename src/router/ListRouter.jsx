@@ -9,7 +9,9 @@ const ListsStack = createNativeStackNavigator();
 
 export default function ListsStackScreen() {
   return (
-    <ListsStack.Navigator screenOptions={{ headerShown: false }}>
+    <ListsStack.Navigator
+      screenOptions={{ headerShown: false, statusBarColor: "black" }}
+    >
       <ListsStack.Screen name="Cestas_Main" component={ListsScreen} />
       <ListsStack.Screen name="NewList" component={NewListScreen} />
       <ListsStack.Screen name="MyLists" component={MyListsScreen} />

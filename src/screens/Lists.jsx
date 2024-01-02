@@ -1,22 +1,26 @@
 import { StyleSheet, View } from "react-native"
 
 import Button from "../components/Button"
+import Header from "../components/Header"
 
 export default function Lists({ navigation }) {
 
   return (
-    <View style={styles.container}>
-      <Button
-        title={"Nueva Cesta"}
-        route={"NewList"}
-        navigation={navigation}
-      />
-      <Button
-        title={"Mis Cestas"}
-        route={"MyLists"}
-        navigation={navigation}
-      />
-    </View>
+    <>
+      <Header title={"Kimchi's Purr-chases"} />
+      <View style={styles.container}>
+        <Button
+          title={"Nueva Cesta"}
+          route={"NewList"}
+          navigation={navigation}
+        />
+        <Button
+          title={"Mis Cestas"}
+          route={"MyLists"}
+          navigation={navigation}
+        />
+      </View>
+    </>
   );
 }
 

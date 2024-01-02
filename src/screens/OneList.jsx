@@ -9,7 +9,8 @@ import {
 } from "react-native";
 import { useState } from "react";
 
-import ProductItem from "../components/ProductItem";
+import ProductItem from "../components/ProductItem"
+import Header from "../components/Header"
 
 export default function OneList({ navigation, route }) {
   const { products } = route.params
@@ -28,6 +29,7 @@ export default function OneList({ navigation, route }) {
   }
 
   const displayList = () => {
+    console.log(products)
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
@@ -47,7 +49,14 @@ export default function OneList({ navigation, route }) {
     );
   };
 
-  return <View style={styles.container}>{displayList()}</View>;
+  return (
+    <>
+      <Header title={"Kimchi's Purr-chases"} />
+      <View style={styles.container}>
+        {displayList()}
+      </View>
+    </>
+  )
 }
 
 const styles = StyleSheet.create({

@@ -1,13 +1,18 @@
 import { StyleSheet, View } from "react-native"
-import Button from "../components/Button";
+
+import Button from "../components/Button"
+import Header from "../components/Header"
 
 export default function Products({ navigation }) {
 
   return (
-    <View style={styles.container}>
-      <Button title={"Añadir Producto"} route={"NewProduct"} navigation={navigation} />
-      <Button title={"Lista Productos"} route={"ProductList"} navigation={navigation} />
-    </View>
+    <>
+      <Header title={"Kimchi's Purr-chases"} />
+      <View style={styles.container}>
+        <Button title={"Añadir Producto"} route={"NewProduct"} navigation={navigation} />
+        <Button title={"Lista Productos"} route={"ProductList"} navigation={navigation} />
+      </View>
+    </>
   );
 }
 

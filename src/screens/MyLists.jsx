@@ -4,8 +4,9 @@ import { useQuery } from "react-query"
 
 import { getAllLists } from "../firebase/listsQueries"
 
-import ListItem from "../components/ListItem";
-import SearchBar from "../components/SearchBar";
+import ListItem from "../components/ListItem"
+import SearchBar from "../components/SearchBar"
+import Header from "../components/Header"
 
 export default function MyLists({ navigation }) {
   const { isLoading, data, refetch } = useQuery("lists", getAllLists)
@@ -42,9 +43,12 @@ export default function MyLists({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      { displayLists() }
-    </View>
+    <>
+      <Header title={"Kimchi's Purr-chases"} />
+      <View style={styles.container}>
+        { displayLists() }
+      </View>
+    </>
   );
 }
 

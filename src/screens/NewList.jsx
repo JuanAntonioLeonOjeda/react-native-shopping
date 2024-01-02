@@ -9,6 +9,7 @@ import { createList } from "../firebase/listsQueries"
 
 import ProductListModal from "../components/ProductListModal"
 import ProductItem from "../components/ProductItem"
+import Header from "../components/Header"
 
 export default function NewList({ navigation }) {
   const {added, isOnList} = useContext(ListContext)
@@ -85,9 +86,12 @@ export default function NewList({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      { displayProducts() }
-    </View>
+    <>
+      <Header title={"Kimchi's Purr-chases"} />
+      <View style={styles.container}>
+        { displayProducts() }
+      </View>
+    </>
   );
 }
 

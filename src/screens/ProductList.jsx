@@ -14,6 +14,7 @@ import { getAllProducts } from "../firebase/productQueries";
 
 import ListItem from "../components/ListItem"
 import SearchBar from "../components/SearchBar"
+import Header from "../components/Header"
 
 export default function Products({navigation}) {
   const { isLoading, data, refetch } = useQuery("products", getAllProducts)
@@ -49,9 +50,12 @@ export default function Products({navigation}) {
   };
 
   return (
-    <View style={styles.container}>
-      {displayProducts(refetch)}
-    </View>
+    <>
+      <Header title={"Kimchi's Purr-chases"} />
+      <View style={styles.container}>
+        {displayProducts(refetch)}
+      </View>
+    </>
   );
 }
 
