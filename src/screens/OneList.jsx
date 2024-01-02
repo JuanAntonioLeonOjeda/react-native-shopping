@@ -29,7 +29,6 @@ export default function OneList({ navigation, route }) {
   }
 
   const displayList = () => {
-    console.log(products)
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
