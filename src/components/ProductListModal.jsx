@@ -8,7 +8,7 @@ import {
   FlatList,
   Text
 } from "react-native";
-import { useState } from "react"
+import { useState, useCallback } from "react"
 
 import SearchBar from "./SearchBar"
 import ProductItem from "./ProductItem";
@@ -24,6 +24,15 @@ export default function ProductListModal({
   const filterProducts = list?.filter((product) => {
     return product.name.toLowerCase().includes(searchQuery.toLowerCase())
   })
+
+    const renderItem = useCallback(({ item }) => {
+      return (
+          <ProductItem 
+              info={item}
+              selected={selected(item.name)}
+          />
+      );
+  }, [selected]); 
 
   return (
     <Modal
@@ -41,11 +50,7 @@ export default function ProductListModal({
             style={styles.list}
             data={filterProducts}
             keyExtractor={(item) => item.name}
-            renderItem={({ item }) => (
-              <ProductItem 
-                info={item}
-                selected={selected(item.name)}
-              />)}
+            renderItem={renderItem}
           />
         </View>
       </View>
