@@ -19,6 +19,7 @@ const queryClient = new QueryClient()
 
 export default function App() {
   const [added, setAdded] = useState([]);
+  const [listName, setListName] = useState('')
 
   const isOnList = (name) => {
     return added.find((product) => product.name === name);
@@ -46,7 +47,7 @@ export default function App() {
 
   return (
     <>
-      <ListContext.Provider value={{ added, setAdded, addProduct, isOnList }}>
+      <ListContext.Provider value={{ added, setAdded, addProduct, isOnList, listName, setListName }}>
         <NavigationContainer>
           <QueryClientProvider client={queryClient}>
             <Tab.Navigator

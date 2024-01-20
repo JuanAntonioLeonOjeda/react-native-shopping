@@ -33,8 +33,8 @@ export default function CustomModal ({ visible, defaultValue, onClose, refetch }
             value={text}
           />
           <View style={styles.actions}>
-            <Button title="Guardar" onPress={saveChanges} color="green" />
             <Button title="Cancelar" onPress={onClose} />
+            <Button title="Guardar" onPress={saveChanges} color="green" />
           </View>
         </View>
       </View>

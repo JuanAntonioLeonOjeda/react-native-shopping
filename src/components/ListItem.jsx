@@ -10,7 +10,7 @@ import DeleteModal from './DeleteModal'
 export default function ListItem({ info, refetch, navigation }) {
   const routeName = navigation.getState().routes[navigation.getState().index].name
 
-  const { addProduct } = useContext(ListContext)
+  const { addProduct, setListName } = useContext(ListContext)
 
   const [modalVisible, setModalVisible] = useState(false)
   const [deleteModalVisible, setDeleteModalVisible] = useState(false)
@@ -41,6 +41,13 @@ export default function ListItem({ info, refetch, navigation }) {
     navigation.navigate('OneList', {products: info.products})
   }
 
+  const editList = () => {
+    addProduct('clear')
+    addProduct(info.products)
+    setListName(prev => (info.name))
+    navigation.navigate("EditList")
+  }
+
   return (
     <View style={styles.item}>
       <Text style={styles.text}>{info.name}</Text>
@@ -59,6 +66,15 @@ export default function ListItem({ info, refetch, navigation }) {
           size={24}
           onPress={routeName === "ProductList" ? editProduct : copyList}
         />
+        {
+          routeName === "MyLists" &&
+          <Ionicons
+            name="pencil"
+            color="#2196f3"
+            size={24}
+            onPress={editList}
+          />
+        }
         <CustomModal
           visible={modalVisible}
           defaultValue={info.name}

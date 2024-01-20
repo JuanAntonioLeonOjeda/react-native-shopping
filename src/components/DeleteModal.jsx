@@ -42,8 +42,8 @@ export default function CustomModal({ visible, product, onClose, refetch, routeN
             {`Eliminar ${product}?`}
           </Text>
           <View style={styles.actions}>
-            <Button title="Eliminar" onPress={confirmDelete} color="red" />
             <Button title="Cancelar" onPress={onClose} />
+            <Button title="Eliminar" onPress={confirmDelete} color="red" />
           </View>
         </View>
       </View>

@@ -60,13 +60,13 @@ export default function QuantityModal({
           </View>
           <View style={styles.actions}>
             <Button 
+              title="Cancelar" 
+              onPress={onClose} 
+            />
+            <Button 
               title="Guardar" 
               color="green"
               onPress={addQuantity}
-            />
-            <Button 
-              title="Cancelar" 
-              onPress={onClose} 
             />
           </View>
         </View>

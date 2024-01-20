@@ -34,6 +34,22 @@ async function createList (data) {
   }
 }
 
+async function editList (listName, array) {
+    try {
+    const q = query(listCollection, where("name", "==", listName))
+    const querySnapshot = await getDocs(q)
+    console.log(querySnapshot)
+    let listDoc = querySnapshot.docs[0]
+
+    await updateDoc(listDoc.ref, {
+      products: array
+    })
+    return 200
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 async function deleteList(list) {
   try {
     const q = query(listCollection, where("name", "==", list));
@@ -51,5 +67,6 @@ async function deleteList(list) {
 export {
   getAllLists,
   createList,
+  editList,
   deleteList
 }
